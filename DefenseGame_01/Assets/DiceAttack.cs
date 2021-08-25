@@ -19,7 +19,7 @@ public class DiceAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(curProjectile == null)
+        if(curProjectile == null && GameObject.FindGameObjectWithTag("Enemy") != null)
         {
             ShootProjectile();
         }

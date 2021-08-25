@@ -19,28 +19,31 @@ public class DiceManager : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetMouseButtonDown(0))
+        DiceClassUp();
+    }
+
+    void DiceClassUp()
+    {
+        if (Input.GetMouseButtonDown(0))
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
             RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction, 50f, LayerMask.GetMask("Player"));
 
-            clickedDice = hit.transform.gameObject;
-
-            Debug.Log(hit.transform.gameObject);
+            if(hit.transform != null)
+                clickedDice = hit.transform.gameObject;
         }
 
-        if(Input.GetMouseButtonUp(0))
+        if (Input.GetMouseButtonUp(0))
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
             RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction, 50f, LayerMask.GetMask("Player"));
-
-            Debug.Log(hit.transform.gameObject);
 
             Destroy(clickedDice);
 
-            hit.transform.GetComponent<Player>().damage *= 2;
+            if(hit.transform != null)
+                hit.transform.GetComponent<Player>().damage *= 2;
         }
     }
 }
